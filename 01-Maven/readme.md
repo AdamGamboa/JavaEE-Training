@@ -1,4 +1,4 @@
-#¿Qué es Maven?#
+# ¿Qué es Maven? 
 Maven es una herramienta de software para la gestión y construcción de proyectos.
 
 - Construir y estructurar un proyecto
@@ -26,16 +26,16 @@ Fue lanzado en 2004, con el objetivo de mejorar algunos aspectos de Apache Ant.
 - Configuración por formato Groovy.
 - Utilizado por google para proyectos Android.
 
-#Repositorios Maven#
+# Repositorios Maven #
 
-##Repositorio Central Maven##
+## Repositorio Central Maven ##
 Es un sitio web donde se encuentra un gran número de librerías disponibles para ser utilizadas por cualquier proyecto.
  
 Por defecto un proyecto Maven buscará en este sitio si no encuentra las dependencias en repositorios locales.
 
 Se puede acceder en: [https://search.maven.org/](https://search.maven.org/)
 
-##Repositorios Remotos##
+## Repositorios Remotos ##
 En determinados entornos, Maven puede ser más que suficiente pero en grandes organizaciones puede que no.
 
 - Acceso a Internet. 
@@ -50,7 +50,7 @@ Se puede instalar un Administrador/Gestor de Repositorios Maven.
 - Archiva
 
 
-##Repositorio Local##
+## Repositorio Local ##
 ¿Dónde deja maven los jar que se baja?
 
 Además de los repositorios remotos también existe un repositorio local que lo utiliza como caché evitando la descarga en las siguientes generaciones del proyecto. 
@@ -59,7 +59,7 @@ Se reduce el tiempo que supondría volver a descargarse todos las librerías.
 Todos los artefactos y librerias que se manejen en maven se guardarán en la carpeta `.m2/repository` ubicada en el directorio `/home` del usuario.
 
 
-#Ciclo de Vida#
+# Ciclo de Vida #
 El ciclo de vida de Maven esta conformado por Goals/Metas. Las partes del ciclo de vida principal del proyecto Maven son:
 
 - **compile:** Genera los ficheros .class compilando los fuentes .java
@@ -99,10 +99,10 @@ Para indicarle a maven que necesitamos un jar determinado, debemos editar el fic
 Una dependencia puede ser: una librería (jar, war, ear) u otro proyecto maven.
 
 
-##Grupos, Artefactos, Version (GAV)##
+## Grupos, Artefactos, Version (GAV) ##
 Las dependencias se identifican por un Grupo, Artefacto y versión.
 
-###Artefacto####
+### Artefacto ####
 Es un componente de software que podemos incluir en un proyecto como dependencia. 
 Normalmente será un jar, pero podría ser de otro tipo, como un war por ejemplo.
  
@@ -136,7 +136,7 @@ El scope sirve para indicar el alcance de nuestra dependencia y su transitiv
 
 
 
-#Estructura de Carpetas en un Proyecto Java con Maven#
+# Estructura de Carpetas en un Proyecto Java con Maven #
 
 Maven nos ayuda a solventar el problema que cada proyecto, IDE, desarrollador puede crear una estructura de un proyecto. Proporciona una estructura de carpetas COMÚN para todos los proyectos.
 
@@ -187,13 +187,13 @@ Al archivo pom.xml se le pueden agregar secciones para:
 - Información de Desarrollo: `<developers>, <mail-list>`
 
 
-# Proyecto multi-módulo en Maven#
+# Proyecto multi-módulo en Maven #
 Maven soporta agregración ademas de herencia de proyectos, con los cual se permite la creación de proyectos con multiples módulos. Un proyecto multi-modulo esta definido por un POM padre referenciando uno o más sub-módulos.El proyecto padre no crea un jar/war como los proyectos ya vistos. En lugar de eso, el solamente hace referencia a otros proyectos maven. 
 
 Las configuraciones del pom padre, son heredadas a todos los submodulos. Esto nos permite configurar dependencias/plugins y comportamientos para todos los proyectos. Los sub-módulos deben hacer referencias ademas al POM padre.
 
 
-##POM PADRE##
+## POM PADRE ##
 
     <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -222,7 +222,7 @@ Las configuraciones del pom padre, son heredadas a todos los submodulos. Esto no
 	</project>
 
 
-##POM SUB-MÓDULO##
+## POM SUB-MÓDULO ##
 
     <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -244,7 +244,7 @@ Las configuraciones del pom padre, son heredadas a todos los submodulos. Esto no
 		</build>
 	</project>
 
-#Plugins#
+# Plugins #
 En Maven tenemos los siguientes tipos de plugins: 
 
 - Build Plugins: Ejecutados durante la fase de build 
@@ -258,12 +258,12 @@ Un plugin permite extender el comportamiento de maven y realizar tareas especifi
 - Copiar archivos en otra direccion.
 
 
-#Profiles#
+# Profiles #
 Los profiles es una forma de agregar un subconjunto de elementos disponibles en el POM.xml, para tener diferentes configuraciones, ambientes, parámetros, según las necesidades, manteniendo la portabilidad del proyecto. El pom resultante es construido al momento de construir el proyecto. Esto cuando se indica utilizer un profile específico. 
 
 El uso más comun es para generar un build con configuración y propiedades diferentes según el tipo de ambiente: desarrollo, pruebas, producción.
 
-##Tipos de Profiles##
+## Tipos de Profiles ##
 **Por Proyecto**
 - Definido en el mismo POM `(pom.xml)`.
 
