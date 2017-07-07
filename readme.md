@@ -7,7 +7,7 @@ Es proveer de un conocimiento básico sobre el desarrollo de aplicaciones web en
 
 Además, se ven algunos otras herramientas que no son parte de Java EE, pero que complementan en desarrollo de una aplicación web, tales como: Maven, Jasper Report.
 
-##Temas
+## Temas
 
 ### Maven: 
 Se tiene como objetivo dar una introducción a la creación de proyectos  la herramienta Maven. Estructura de un proyecto Maven y el manejo de dependencias en un proyecto. Además de profundizar en temas como proyectos multi-módulos, plugins y los profiles de compilación.

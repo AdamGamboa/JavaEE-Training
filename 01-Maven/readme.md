@@ -108,15 +108,15 @@ Normalmente será un jar, pero podría ser de otro tipo, como un war por ejem
  
 Los artefactos pueden tener dependencias entre sí, por lo tanto, si incluimos un artefacto en un proyecto, también obtendremos sus dependencias.
 
-###Grupo
+### Grupo
 Un grupo es un conjunto de artefactos. Es una manera de organizarlos. Así por ejemplo todos los artefactos de Spring Framewok se encuentran en el grupo org.springframework.
 
-###Versión
+### Versión
 Es la versión del artefacto.
 
 
 
-##Scope
+## Scope
 El scope sirve para indicar el alcance de nuestra dependencia y su transitividad. Hay 6 tipos:
 
 - **compile:** es la que tenemos por defecto sino especificamos scope. Indica que la dependencia es necesaria para compilar. La dependencia además se propaga en los proyectos dependientes.
