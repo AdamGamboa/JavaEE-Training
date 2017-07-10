@@ -24,12 +24,12 @@ Una aplicación típica de JavaServer Faces comprende lo siguiente:
 - JSF es extensible, por lo que se pueden desarrollar nuevos componentes a medida, También se puede modificar el comportamiento del framework mediante APIs que controlan su funcionamiento.
 
 
-#Usando JSF 
+# Usando JSF #
 
-##Componentes HTML
+## Componentes HTML ##
 Java Server Faces provee de una serie de componentes HTML básicos sobre los cuales trabajar, muchos de estos componentes ya presentan caracteristicas Ajax. Además JSF permite personalizar y extender los componentes existentes creando nuevos componentes que se adapten a las necesidades.
 
-### Componentes Básicos
+### Componentes Básicos ###
 
 <table>
 	<tr>
@@ -106,7 +106,7 @@ Java Server Faces provee de una serie de componentes HTML básicos sobre los cua
 	</tr>
 </table>
 
-### Data Table 
+### Data Table ###
 
     <h:dataTable value="#{userData.employees}" var="employee"
          styleClass="employeeTable"
@@ -135,7 +135,7 @@ Java Server Faces provee de una serie de componentes HTML básicos sobre los cua
    	</h:dataTable>
 
 
-### Facelets
+### Facelets ###
 Facelets es el sistema de **plantillas** utilizado por JSF. Proporciona gran flexibilidad para gestionar partes comunes de varias páginas desde un mismo lugar.
 
 <table>
@@ -225,7 +225,7 @@ Utilizando la plantilla
 	   </h:body> 
 	</html>	
 
-### Navegación
+### Navegación ###
 
 Se conoce como regla de navegación la mecanismo utilizado por JSF para navegar de una página a otra, hay diferentes maneras de realizarlo, las 2 mas conocidas. 
 
@@ -272,7 +272,7 @@ Por medio de reglas de navegacion definidas en el archivo faces-config.xml
 
 
 
-### Convertidores
+### Convertidores ###
 JSF proporciona convertidores incorporados para convertir los datos de su componente de interfaz de usuario de objeto que se utiliza en un bean gestionado y vice versa.For ejemplo, estas etiquetas pueden convertir un texto en objeto de fecha y puede validar el formato de entrada también.
 	
 <table>
@@ -388,7 +388,7 @@ Se utiliza en la aplicación.
     <h:outputText value="#{msg['mensaje.saludo']}" />
 
 
-##ManagedBean Scopes
+## ManagedBean Scopes ##
 
 El controlador de JSF está basado en un Bean. Este es el ManagedBean. Antes se usaba la notación @ManagedBean, pero a partir de JavaEE7 se recomienda usar un @Name. Ya que técnicamente hacen lo mismo, esto es para reducir notaciones redundantes. 
 
@@ -472,7 +472,7 @@ En el se agregan:
 - Modificaciones a componentes (opcional) 
 - Reglas de navegacion (opcional)
 
-#Primefaces
+# Primefaces #
 PrimeFaces es una librería de componentes visuales open source desarrollada y mantenida por Prime Technology, que proporciona Componentes enriquecidos para desarrollar las aplicaciones web.
 
 Las principales características de Primefaces son:
@@ -498,7 +498,7 @@ Para la versión actual de primefaces (v5.x y 6.x) solo es necesari agregar la d
 En versiones anteriores era necesario configurar el archivo web.xml para que utilizara primefaces.
 
 
-##Componentes Disponibles
+## Componentes Disponibles ##
 
 Existe una gran variedad, muchos de ellos son extensiones de los componentes básicos de JSF, muchos otros son completamente nuevos, constantemente se están agregando nuevos componentes con cada versión. 
 
@@ -508,7 +508,7 @@ Para conocerlos mejor se puede acceder al showcase.
 
 
 
-#Referencias
+# Referencias #
 - http://www.apuntesdejava.com/2013/09/tutorial-javaserver-faces-22-java-ee-7.html
 - https://www.adictosaltrabajo.com/tutoriales/introduccion-jsf-java/
 - http://www.w3ii.com/es/jsf/default.html

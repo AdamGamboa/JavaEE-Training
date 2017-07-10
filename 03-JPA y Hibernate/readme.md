@@ -8,7 +8,7 @@ El objetivo que persigue el diseño de esta API es no perder las ventajas de la 
 ## ¿Por qué JPA?
 Objetos relacionales están representados en un formato tabular, mientras que modelos de objetos son representados en un gráfico de interconexión formato de objeto. 
 
-## JPA Proveedores
+## JPA Proveedores ##
 JPA es una API open source, por lo tanto distintos proveedores como Oracle, Redhat, Eclipse, etc. proporcionar nuevos productos mediante la adición de la persistencia JPA sabor en ellas. Algunos de estos productos incluyen:
 
 - Hibernate
@@ -27,7 +27,7 @@ En la siguiente sección se aclaran los siguientes conceptos
 - Query
 
 
-###Persistence.xml
+### Persistence.xml ###
 El primer concepto es del fichero persistence.xml que se encuentra ubicado en la carpeta META-INF . Este fichero se encarga de conectarnos a la base de datos y define el conjunto de entidades que vamos a gestionar.
 
 	<persistence xmlns="http://java.sun.com/xml/ns/persistence"
@@ -55,7 +55,7 @@ En un primer lugar un *EntityManagerFactory* es único y es con el que nosotros 
 
 Es decir, existe un *EntityManagerFactory* con su respectivo Persistence Unit, para cada origen de datos distinto.
 
-### Entity Manager
+### Entity Manager ###
 Una vez disponemos de un *EntityManagerFactory* este será capaz de construir un objeto de tipo **EntityManager** que como su nombre indica gestiona un conjunto de entidades u objetos.
 
 En principio estas entidades son objetos POJO normales con los cuales estamos trabajando en nuestro programa Java .El **EntityManager** será el encargado de guardarlos, consultarlos, modificarlos y eliminarlos de la base de datos. 
@@ -79,10 +79,10 @@ Por medio del Entity Manager es que realizamos una conexión a la base de datos 
 		 }
 	}
 
-###Entity/Entidad
+### Entity/Entidad ###
 Se conoce como entidad a los objetos en Java que estamos mapeando a la base de datos. Una Entidad puede ser una tabla o una vista de base de datos. 
 
-###Query 
+### Query ###
 Las consultas o queries es la manera de realizar enviar instrucciones a la base de datos. Usualmente se maneja un dialecto de SQL orientado a objetos conocido como JPQL, se indican los objetos y sus atributos en lugar de tablas y columnas.
 
 Las consultas también se pueden hacer en SQL Nativo, si es necesario.
@@ -137,7 +137,7 @@ El *Entity Manager* proporciona las funciones para interactuar con la base se da
 			private String telefono;
     	}
 
-### Relaciones 
+### Relaciones ###
  
 **@ManyToOne:** Es la relación de muchos a 1. En JPA se representa como un objeto que contiene a otro. 
 
@@ -301,7 +301,7 @@ Son queries en lenguaje SQL, se suelen utilizar cuando la complejidad de la cons
 - *`executeUpdate() :`* Ejecuta el query sin esperar un resultado de consulta.
 
 
-#Hibernate y JPA
+# Hibernate y JPA #
 
 Hibernate es una framework de mapeo objeto-relacional (ORM) para la plataforma Java. 
 
@@ -312,7 +312,7 @@ Esto no quiere decir que Hibernate simplemente implemente el standard de JPA. Hi
 Se puede utilizar hibernate sin JPA, sin embargo ese no es el objetivo y enfoque de este curso.
 
 
-#Referencias
+# Referencias
 https://es.wikipedia.org/wiki/Java_Persistence_API
 https://www.tutorialspoint.com/es/jpa/jpa_introduction.htm
 http://www.arquitecturajava.com/ejemplo-de-jpa/
