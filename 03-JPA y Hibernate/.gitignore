@@ -1,1 +1,4 @@
-
+/jpa/jpa-common/target
+/jpa/jpa-domain/target
+/jpa/jpa-services/target
+/jpa/jpa-web/target
