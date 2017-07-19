@@ -1,8 +1,10 @@
 package com.training.javaee.jpa.web.actor;
 
+import com.training.javaee.jpa.domain.Actor;
 import com.training.javaee.jpa.services.ServicioActor;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author training
  */
-@WebServlet(name = "ActorCreate", urlPatterns = {"/actor/create"})
-public class ActorCreate extends HttpServlet {
+@WebServlet(name = "ActorEdit", urlPatterns = {"/actor/edit"})
+public class ActorEdit extends HttpServlet {
     
     @Inject
     private ServicioActor servicioActor;
@@ -33,21 +35,35 @@ public class ActorCreate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Object id = request.getParameter("actorId");
+        Integer actorId = id == null ? -1 : Integer.parseInt(id.toString());
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Crear Actor</title>");   
+            out.println("<title>Editar Actor</title>");   
             out.println("<link rel='stylesheet' href='/jpa-web/resources/css/theme.css'/>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Crear actor</h1>");
-            out.println("<form method='post' action='create' >");
-            out.println("Nombre: <input type='text' name='name'><br/>");
-            out.println("Apellido: <input type='text' name='lastname'><br/>");
-            out.println("<input type='submit' value='Guardar'>");
-            out.println("</form>");
+            out.println("<h1>Editar actor</h1>");
+            try{
+                Actor actor = this.servicioActor.buscar(actorId);
+                if(actor != null){
+                    out.println("<form method='post' action='edit' >");
+                    out.println("<input type='hidden' name='actorId' value='"+actor.getActorId()+"'>");
+                    out.println("Nombre: <input type='text' name='name' value='"+actor.getFirstName()+"'><br/>");
+                    out.println("Apellido: <input type='text' name='lastname' value='"+actor.getLastName()+"'><br/>");
+                    out.println("<input type='submit' value='Guardar'>");
+                    out.println("</form>");
+                }else{
+                    out.println("<span style='color:red'>No se ha encontrado el actor seleccionado</span>");
+                }
+            }catch(Exception ex){
+                out.println("<span style='color:red'>"+ex.getMessage()+"</span>");
+            }
+            
             out.println("<br/><br/><a href='list'>Regresar</a>");
             out.println("</body>");
             out.println("</html>");
@@ -66,6 +82,7 @@ public class ActorCreate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter("actorId");
         String name = request.getParameter("name");
         String lastname = request.getParameter("lastname");
         try (PrintWriter out = response.getWriter()) {
@@ -73,18 +90,23 @@ public class ActorCreate extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Crear Actor</title>");   
+            out.println("<title>Editar Actor</title>");   
             out.println("<link rel='stylesheet' href='/jpa-web/resources/css/theme.css'/>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Crear actor</h1>");
+            out.println("<h1>Editar actor</h1>");
             if(name == null || lastname == null || name.isEmpty() || lastname.isEmpty()){
                 out.println("<span style='color:red'> Nombre y Apellido son requeridos</span>");
             }
             else{
                 try{
-                    this.servicioActor.guardar(name, lastname);
-                    out.println("<span style='color:green'>Actor creado correctamente</span>");
+                    Actor actorEditar = new Actor();
+                    actorEditar.setActorId(Integer.parseInt(id));
+                    actorEditar.setFirstName(name);
+                    actorEditar.setLastName(lastname);
+                    actorEditar.setLastUpdate(new Date());
+                    this.servicioActor.modificar(actorEditar);
+                    out.println("<span style='color:green'>Actor modificado correctamente</span>");
                 }catch(Exception ex){
                     out.println("<span style='color:red'>"+ex.getMessage()+"</span>");
                 }

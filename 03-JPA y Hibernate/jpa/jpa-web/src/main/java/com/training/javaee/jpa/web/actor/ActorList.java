@@ -53,7 +53,10 @@ public class ActorList extends HttpServlet {
                     out.println("<tr>"
                                  + "<td>"+actor.getFirstName()+"</td>"
                                  + "<td>"+actor.getLastName()+"</td>"
-                                 + "<td><a href='delete?actorId="+actor.getActorId()+"'>[Eliminar]</a></td>"
+                                 + "<td>"
+                                    + "<a href='edit?actorId="+actor.getActorId()+"'>[Editar]</a>"
+                                    + "<a href='delete?actorId="+actor.getActorId()+"'>[Eliminar]</a>"
+                                + "</td>"
                             + "</tr>");
                 }
             }catch(Exception ex){
