@@ -1,1 +1,4 @@
-
+/ejb/ejb-common/target
+/ejb/ejb-domain/target
+/ejb/ejb-services/target
+/ejb/ejb-web/target
