@@ -50,6 +50,11 @@
             <artifactId>ejb-services</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.training.javaee.ejb</groupId>
+            <artifactId>ejb-jobs</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
