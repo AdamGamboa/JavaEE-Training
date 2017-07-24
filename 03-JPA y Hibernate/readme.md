@@ -300,6 +300,54 @@ Son queries en lenguaje SQL, se suelen utilizar cuando la complejidad de la cons
 - *`getSingleResult() :`* Obtiene solamente un objeto de la consulta.
 - *`executeUpdate() :`* Ejecuta el query sin esperar un resultado de consulta.
 
+## Procedimientos Almacenados ##
+
+
+
+JPA 2.1 introdujo los `StoreProcedureQuery` y `NamedStoredProcedureQuery` que puede ser usado para definir de forma declarativa un llamado a un procedimiento almacenado. 
+
+El procedimiento puede utilizar 4 modos diferentes de parámetros:
+ 
+- IN,
+- OUT,
+- INOUT,
+- REF_CURSOR
+
+***Nota**: Muy importante a tomar en cuenta, es que cada Motor de Base de datos tiene particularidades en cuanto a la creación y ejecución de procedimientos almacenados por lo cual, por lo cual puede que para algunas bases de datos se requiere hacer variaciones al código estándar.*
+
+### Ejemplo de StoreProcedureQuery ###
+
+    StoredProcedureQuery query = this.em.createStoredProcedureQuery("calculate");
+    query.registerStoredProcedureParameter("x", Double.class, ParameterMode.IN);
+    query.registerStoredProcedureParameter("y", Double.class, ParameterMode.IN);
+    query.registerStoredProcedureParameter("sum", Double.class, ParameterMode.OUT);
+
+### Ejemplo de @NamedStoreProcedureQuery ###
+
+Despues de definir el `@NamedStoredProcedureQuery`, se puede utilizar el método `createNamedStoredProcedureQuery(String name)` del `EntityManager` para crear un objeto `StoredProcedureQuery`. Este objeto proporciona los métodos requeridos para indicar los parametros, ejecutar el llamado y objeter los resultados.
+
+Definiendo la declaración del procedimiento almacenado: 
+
+	@NamedStoredProcedureQuery(
+		name = "calculate", 
+		procedureName = "calculate", 
+		parameters = { 
+			@StoredProcedureParameter(mode = ParameterMode.IN, 
+						type = Double.class, name = "x"), 
+			@StoredProcedureParameter(mode = ParameterMode.IN, 
+						type = Double.class, name = "y"), 
+			@StoredProcedureParameter(mode = ParameterMode.OUT, 
+						type = Double.class, name = "sum")
+		}
+	)
+
+Llamando al procedimiento almacenado.
+
+    StoredProcedureQuery query = this.em.createNamedStoredProcedureQuery("calculate");
+    query.setParameter("x", 1.23d);
+    query.setParameter("y", 4.56d);
+    query.execute();
+    Double sum = (Double) query.getOutputParameterValue("sum");
 
 # Hibernate y JPA #
 
@@ -317,3 +365,4 @@ https://es.wikipedia.org/wiki/Java_Persistence_API
 https://www.tutorialspoint.com/es/jpa/jpa_introduction.htm
 http://www.arquitecturajava.com/ejemplo-de-jpa/
 http://www.arquitecturajava.com/jpa-entitymanager-metodos/
+https://www.thoughts-on-java.org/call-stored-procedures-jpa/
