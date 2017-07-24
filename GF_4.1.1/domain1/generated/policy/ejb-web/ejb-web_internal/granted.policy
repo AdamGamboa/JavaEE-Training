@@ -1,0 +1,22 @@
+/* AUTOMATICALLY GENERATED ON Thu Jul 20 19:04:42 CST 2017*/
+/* DO NOT EDIT */
+
+grant {
+  permission javax.security.jacc.EJBMethodPermission "ServicioActor", "guardar,Local,java.lang.String,java.lang.String";
+  permission javax.security.jacc.EJBMethodPermission "ServicioFilm", "buscar,Local,short";
+  permission javax.security.jacc.EJBMethodPermission "ServicioActor", "modificar,Local,com.training.javaee.ejb.domain.Actor";
+  permission javax.security.jacc.EJBMethodPermission "ServicioActor", "eliminar,Local,int";
+  permission javax.security.jacc.EJBMethodPermission "ServicioActor", "consultar,Local,";
+  permission javax.security.jacc.EJBMethodPermission "ServicioLanguage", "consultar,Local,";
+  permission javax.security.jacc.EJBMethodPermission "ServicioActor", "eliminar,Local,com.training.javaee.ejb.domain.Actor";
+  permission javax.security.jacc.EJBMethodPermission "ServicioActor", "buscar,Local,int";
+  permission javax.security.jacc.EJBMethodPermission "ServicioActor", "guardar,Local,com.training.javaee.ejb.domain.Actor";
+  permission javax.security.jacc.EJBMethodPermission "ServicioFilm", "consultar,Local,";
+};
+
+grant      principal * * {
+  permission javax.security.jacc.EJBRoleRefPermission "ServicioLanguage", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "ServicioActor", "**";
+  permission javax.security.jacc.EJBRoleRefPermission "ServicioFilm", "**";
+};
+

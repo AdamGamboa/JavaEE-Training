@@ -1,0 +1,21 @@
+/* AUTOMATICALLY GENERATED ON Thu Jul 20 17:57:41 CST 2017*/
+/* DO NOT EDIT */
+
+grant {
+  permission javax.security.jacc.WebResourcePermission "/";
+  permission javax.security.jacc.WebUserDataPermission "/";
+};
+
+grant      principal * * {
+  permission javax.security.jacc.WebRoleRefPermission "jsp", "**";
+  permission javax.security.jacc.WebRoleRefPermission "", "**";
+  permission javax.security.jacc.WebRoleRefPermission "ActorEdit", "**";
+  permission javax.security.jacc.WebRoleRefPermission "LanguageList", "**";
+  permission javax.security.jacc.WebRoleRefPermission "ActorView", "**";
+  permission javax.security.jacc.WebRoleRefPermission "FilmView", "**";
+  permission javax.security.jacc.WebRoleRefPermission "ActorDelete", "**";
+  permission javax.security.jacc.WebRoleRefPermission "FilmList", "**";
+  permission javax.security.jacc.WebRoleRefPermission "ActorCreate", "**";
+  permission javax.security.jacc.WebRoleRefPermission "default", "**";
+};
+
