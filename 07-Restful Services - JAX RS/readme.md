@@ -314,8 +314,8 @@ Los métodos post(...), put(...), patch(...), permiten enviar un objeto en el bo
 			.request(MediaType.APPLICATION_XML)
        		.post(order, TrackingNumber.class);
    
-### Obtener el resultado de un request ###
-Todos los métodos http del objeto request, permiten indicar si deseamos obtener el resultado en una clase especifica. En caso de no indicarlo devuelve un objeto de tipo Response.
+### Obtener el resultado de un Response ###
+Todos los métodos http del objeto response, permiten indicar si deseamos obtener el resultado en una clase especifica. En caso de no indicarlo devuelve un objeto de tipo Response.
 
 Obteniendo una respuesta de clase TrackingNumber:
 
