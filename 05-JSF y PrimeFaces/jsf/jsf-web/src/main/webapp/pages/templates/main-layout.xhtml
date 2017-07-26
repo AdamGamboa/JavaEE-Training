@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+        <title>
+            <ui:insert name="title">JSF Integrate Bootstrap</ui:insert>
+        </title>
+
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.6/css/bootstrap.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="bootstrap/3.3.6/css/bootstrap-theme.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.5.0/css/font-awesome.min-jsf.css" />
+        <h:outputStylesheet name="css/style.css" />
+        <ui:insert name="javaScript">
+
+        </ui:insert>
+    </h:head>
+    <h:body>
+
+        <ui:include src="header.xhtml" />
+        <ui:include src="menu.xhtml" />
+        <h:form id="form">
+            <div class="container">
+                <p:messages autoUpdate="true"/>
+                
+                <ui:insert name="content">
+                    <ui:include src="content.xhtml" />
+                </ui:insert>
+                <ui:insert name="footer">
+                    <ui:include src="footer.xhtml" />
+                </ui:insert>
+            </div>
+        </h:form>
+
+        <!-- load js at bottom for faster loading-->
+        <h:outputScript library="webjars" name="jquery/2.1.4/jquery.min.js"/>
+        <h:outputScript library="webjars" name="bootstrap/3.3.6/js/bootstrap.min.js" />
+
+    </h:body>
+</html>

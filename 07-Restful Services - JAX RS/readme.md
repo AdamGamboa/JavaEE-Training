@@ -128,10 +128,228 @@ Define el tipo de objeto de solicitud (Media Type) que el método puede recibir 
 
 ## Publicando un servicio Rest en Java ##
 
+- Clase
+	- La clase debe incluir la anotacion @Path
+	- Si a la anotación @Path("<value>") tiene un valor, ese valor será parte de la URI base de todos los métodos de dicha clase.
+	- Si se desea inyectar algun servicio o instancia en el servicio Rest, esta clase debe de utilizar la anotación @RequestScoped de CDI.
+- Métodos
+	- Cada método que exponga o publique una funcionalidad en el servicio, debe de tener una anotación con el verbo HTTP respectivo: @GET, @POST, @PUT, @DELETE, etc.
+	- Es opcional que el método utilice la anotación @Path, si la utiliza y esta anotación un valor @Path("<value>") este valor será parte de la URI de dicho método.
+	- **No puede** haber dos métodos con el mismo verbo HTTP, y con la misma ruta URI
+	- **Puede** haber 2 métodos con mismo URI y diferentes verbo http.
+	- Si un método utiliza la @Produces, por defecto el resultado será en JSON.
+
+- Parámetros
+	- Un método solamente pueden recibir un parámetro en el body.
+	- Un método puede recibir tantos parámetros @PathParam y @QueryParam como sean necesarios.
+	- Todos los @PathParam requieren que el nombre del parámetro (indicado en la anotación) esté mapeado en el @Path del método. 
+	- Los parámetros @PathParam y @QueryParam permiten tipos primitivos, String y Date. Estos no permiten objetos complejos.
+	- Los metodos http @GET y @DELETE no permiten indicar un objeto en el body. 
+
+Ejemplo de un servicio Rest:
+
+	import javax.ws.rs.GET;
+	import javax.ws.rs.Path;
+	import javax.ws.rs.core.Response;
+
+	@Path("/users")
+	@RequestScoped
+	public class UserRestService {
+		
+		@Inject 
+		private UserService userService;
+
+		@GET
+		public Response getUser() {
+			List<User> users = userService.list();
+			GenericEntity<List<User>> list = 
+				new GenericEntity<List<User>>(users) {};
+
+			return Response.status(200)
+				.entity(list)
+				.build();
+		}
+	
+		@GET
+		@Path("/vip")
+		public Response getUserVIP() {
+			List<User> usersVip = userService.listVip();
+			GenericEntity<List<User>> list = 
+				new GenericEntity<List<User>>(usersVip) {};
+
+			return Response.status(200)
+				.entity(list)
+				.build();
+		}
+
+		@GET
+		@Path("/{userId}")
+		@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+		public Response getUser(@PathParam("userId") int userId) {
+			User user = userService.find(userId);
+			return Response.status(200)
+				.entity(user)
+				.build();
+		}
+
+		@POST
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		public Response saveUser(User user) {
+			User savedUser = userService.save(user);
+			return Response.status(200)
+				.entity(savedUser)
+				.build();
+		}
+		
+		@POST
+		@Path("/vip")
+		@Consumes(MediaType.APPLICATION_JSON)
+		public Response saveUserVIP(User user) {
+			User savedUserVIP = userService.saveVIP(user); 
+			return Response.status(200)
+				.entity(savedUserVIP)
+				.build();
+		}
+
+		@PUT
+		@Consumes(MediaType.APPLICATION_JSON)
+		public Response updateUser(User user) {
+			userService.update(user);
+			return Response.ok().build();
+		}
+
+		@DELETE
+		@Path("/{userId}")
+		public Response deleteUser(@PathParam("userId") int userId) {
+			userService.delete(userId);
+			return Response.status(200).build();
+		}
+	}
+
+### Configurando con web.xml ###
+
+Con el archivo web.xml podemos indicar al Jersey principalmente 2 cosas:
+
+- En que paquete de nuestra aplicación buscar por nuestros servicios Rest (aquellos anotados con @Path)
+- El **URL base** en el cual van a estar ubicados los servicio rest publicados
+
+Ejemplo:
+
+		<servlet>
+				<servlet-name>jersey-serlvet</servlet-name>
+				<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+			<init-param>
+				 <param-name>jersey.config.server.provider.packages</param-name>
+				 <param-value>com.training.javaee.rest</param-value>
+			</init-param>
+			<load-on-startup>1</load-on-startup>
+		</servlet>
+		   
+		<servlet-mapping>
+			<servlet-name>jersey-serlvet</servlet-name>
+			<url-pattern>/rest/*</url-pattern>
+		</servlet-mapping>
+
+
+### Configurando con @ApplicationPath ###
+
+Se puede también crear una clase de Java que extienda de la clase `javax.ws.rs.core.Application` y que utilice la anotación `@ApplicationPath("resources")`.
+
+Se puede utilizar la anotación `javax.ws.rs.ApplicationPath` para definir el URI base en donde se publicarán los servicios restful creados.
+
+    import javax.ws.rs.core.Application;
+    javax.ws.rs.ApplicationPath;
+    
+    @ApplicationPath("rest/api")
+    public class MyApplication extends Application {
+    	
+    }
+
+
+### Dependencias ###
+Debido a que es parte del estandar de Java EE, no es necesario agregar dependencias para JAX-RS, sin embargo si queremos utilizar alguna particularidad de Jersey podemos incluir las dependencias.
+
+		<!-- Jersey 2.19 -->
+        <dependency><!-- Opcional -->
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>${jersey2.version}</version>
+        </dependency>
+        <dependency> <!-- Opcional -->
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>${jersey2.version}</version>
+        </dependency>
+
 ## Consumiendo un servicio Rest en Java ##
 
+Para consumir un servicio web se utiliza el la clase Client y WebTarget proporcionados por jax-rs.
+
+	Client client = ClientBuilder.newClient();
+	String name = client.target("http://example.com/webapi/hello")
+	        .request(MediaType.TEXT_PLAIN)
+	        .get(String.class);
+	client.close();
 
 
+### Seteando parámetros
+Se puede utilizar los métodos resolveTemplate(String, Object) para indicar valores en un @PathParam y queryParam(String, Object) para indicar los @QueryParam. 
+
+Ejemplo para el recurso en el URL: http://example.com/webapi/read/janedoe?chapter=1
+
+	WebTarget myResource = client.target("http://example.com/webapi/read")
+        .path("{userName}")
+        .resolveTemplate("userName", "janedoe")        
+		.queryParam("chapter", "1");
+	Response response = myResource.request(...).get();
+
+### Enviando un objeto en el body 
+Los métodos post(...), put(...), patch(...), permiten enviar un objeto en el body del request.
+
+    Client client = ClientBuilder.newClient();
+    StoreOrder order = new StoreOrder(...);
+    WebTarget myResource = client.target("http://example.com/webapi/write");
+    TrackingNumber trackingNumber = myResource
+			.request(MediaType.APPLICATION_XML)
+       		.post(order, TrackingNumber.class);
+   
+### Obtener el resultado de un request ###
+Todos los métodos http del objeto request, permiten indicar si deseamos obtener el resultado en una clase especifica. En caso de no indicarlo devuelve un objeto de tipo Response.
+
+Obteniendo una respuesta de clase TrackingNumber:
+
+	TrackingNumber trackingNumber = myResource
+			.request(MediaType.APPLICATION_XML)
+       		.post(order, TrackingNumber.class);
+
+Obteniendo una respuesta de clase String:
+
+	String response = myResource
+		.request(MediaType.TEXT_PLAIN)
+        .get(String.class);
+
+Obteniendo una respuesta Response:
+
+	Response response = myResource
+		.request(MediaType.APPLICATION_JSON)
+        .get();
+	MyObject myObject = (MyObject) response.getEntity();
+
+Obteniendo una lista:
+
+	List<Customer> customers =
+            client.target("http://localhost:8080/customer/webapi/Customer")
+            .request(MediaType.APPLICATION_XML)
+            .get(new GenericType<List<Customer>>() {
+            });
+    return customers;
+    
 # Referencias #
 
-http://www.i2factory.com/es/integracion/qu%C3%A9-es-un-servicio-restful
+- http://www.i2factory.com/es/integracion/qu%C3%A9-es-un-servicio-restful
+- https://www.javatpoint.com/jax-rs-annotations-example
+- http://docs.oracle.com/javaee/6/tutorial/doc/giepu.html
+- https://docs.oracle.com/cd/E24329_01/web.1211/e24983/configure.htm#RESTF191
+- http://howtodoinjava.com/jersey/jersey-2-hello-world-application-tutorial/
+- https://docs.oracle.com/javaee/7/tutorial/jaxrs-client001.htm

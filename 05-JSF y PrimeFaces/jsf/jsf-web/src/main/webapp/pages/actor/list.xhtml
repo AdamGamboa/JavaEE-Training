@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+    template="/pages/templates/main-layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        Lista de Actores
+    </ui:define>
+
+    <ui:define name="content">
+        Listado de Actores
+        
+        <p:panelGrid>
+            <p:row>
+                <p:column>
+                    <p:commandButton value="Nuevo" 
+                                     action="/pages/actor/create"
+                                     />
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Editar"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton id="btnVer" value="Ver" 
+                                     action="#{beanListaActores.ver()}">
+                        <f:param name="actorId" value="#{beanListaActores.actorSeleccionado.actorId}"/>
+                    </p:commandButton>
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Eliminar"/>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+        <p:dataTable id="tabla_actores"
+                     value="#{beanListaActores.listaActores}"
+                     var="actor"
+                     paginator="true"
+                     rows="10"
+                     selectionMode="single" 
+                     selection="#{beanListaActores.actorSeleccionado}"
+                     rowKey="#{actor.actorId}">
+            <p:ajax event="rowSelect" update=":form:btnVer"/>
+            
+            <p:column headerText="Nombre">
+                #{actor.firstName}
+            </p:column>
+
+            <p:column headerText="Apellido">
+                    #{actor.lastName}
+            </p:column>
+
+            <p:column headerText="Actualizado">
+                <h:outputLabel value="#{actor.lastUpdate}">
+                    <f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+                </h:outputLabel>
+            </p:column>
+
+        </p:dataTable>
+    </ui:define>
+</ui:composition>
