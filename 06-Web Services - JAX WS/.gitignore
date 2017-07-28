@@ -1,1 +1,6 @@
-
+/jaxws/jaxws-common/target
+/jaxws/jaxws-domain/target
+/jaxws/jaxws-model/target
+/jaxws/jaxws-services/target
+/jaxws/jaxws-web/target
+/jaxws/jaxws-webservices/target
