@@ -1,1 +1,5 @@
-
+/jsf/jsf-common/target/
+/jsf/jsf-domain/target/
+/jsf/jsf-model/target/
+/jsf/jsf-services/target/
+/jsf/jsf-web/target/

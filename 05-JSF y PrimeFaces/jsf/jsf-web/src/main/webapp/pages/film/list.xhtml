@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+    template="/pages/templates/main-layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        Lista de Peliculas
+    </ui:define>
+
+    <ui:define name="content">
+        Listado de Peliculas
+        
+        
+        <p:dataTable id="tabla_peliculas"
+                     value="#{beanListaPeliculas.listaPeliculas}"
+                     var="film"
+                     paginator="true"
+                     rows="10">
+            
+            <p:column headerText="Titulo">
+                #{film.title}
+            </p:column>
+
+            <p:column headerText="Descripcion">
+                    #{film.description}
+            </p:column>
+            
+            <p:column headerText="Ano">
+                    #{film.releaseYear}
+            </p:column>
+            
+            <p:column headerText="Rating">
+                    #{film.rating}
+            </p:column>
+        </p:dataTable>
+    </ui:define>
+</ui:composition>

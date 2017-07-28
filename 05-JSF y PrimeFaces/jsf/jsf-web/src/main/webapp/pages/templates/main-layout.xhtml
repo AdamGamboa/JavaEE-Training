@@ -11,7 +11,7 @@
 
 
         <title>
-            <ui:insert name="title">JSF Integrate Bootstrap</ui:insert>
+            <ui:insert name="title">#{label['app.titulo']}</ui:insert>
         </title>
 
         <h:outputStylesheet library="webjars" name="bootstrap/3.3.6/css/bootstrap.min-jsf.css" />
@@ -29,7 +29,9 @@
         <h:form id="form">
             <div class="container">
                 <p:messages autoUpdate="true"/>
-                
+                <h1>
+                    <ui:insert name="title"/>
+                </h1>
                 <ui:insert name="content">
                     <ui:include src="content.xhtml" />
                 </ui:insert>

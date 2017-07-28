@@ -8,16 +8,15 @@
     xmlns:p="http://primefaces.org/ui">
         
     <ui:define name="title">
-        Ver Usuario
+        #{label['actor.ver.titulo']}
     </ui:define>
     
     <ui:define name="content">
         
-        <h1>Ver Usuario</h1>
         <p:panelGrid>
             <p:row>
                 <p:column>
-                    <p:outputLabel value="Nombre: "/>
+                    <p:outputLabel value="#{label['actor.nombre']}"/>
                 </p:column>
                 <p:column>
                     <p:inputText value="#{beanVerActor.actor.firstName}"
@@ -27,7 +26,7 @@
             
             <p:row>
                 <p:column>
-                    <p:outputLabel value="Apellido "/>
+                    <p:outputLabel value="#{label['actor.apellido']}"/>
                 </p:column>
                 <p:column>
                     <p:inputText value="#{beanVerActor.actor.lastName}"
@@ -36,7 +35,7 @@
             </p:row>
             <p:row>
                 <p:column>
-                    <p:commandLink value="Regresar"
+                    <p:commandLink value="#{label['btn.regresar']}"
                                    action="/pages/actor/list"
                                    ajax="false"/>
                 </p:column>

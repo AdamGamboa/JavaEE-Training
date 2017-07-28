@@ -8,32 +8,23 @@
     xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
-        Lista de Actores
+        #{label['actor.listado.titulo']}
     </ui:define>
 
     <ui:define name="content">
-        Listado de Actores
-        
-        <p:panelGrid>
-            <p:row>
-                <p:column>
-                    <p:commandButton value="Nuevo" 
-                                     action="/pages/actor/create"
-                                     />
-                </p:column>
-                <p:column>
-                    <p:commandButton value="Editar"/>
-                </p:column>
-                <p:column>
-                    <p:commandButton id="btnVer" value="Ver" 
-                                     action="#{beanListaActores.ver()}">
-                        <f:param name="actorId" value="#{beanListaActores.actorSeleccionado.actorId}"/>
-                    </p:commandButton>
-                </p:column>
-                <p:column>
-                    <p:commandButton value="Eliminar"/>
-                </p:column>
-            </p:row>
+        <p:panelGrid layout="grid" columns="4" style="max-width: 500px" >
+            <p:commandButton value="#{label['btn.nuevo']}" 
+                             action="/pages/actor/create"
+                             />
+
+            <p:commandButton value="#{label['btn.editar']}"/>
+            
+            <p:commandButton id="btnVer" 
+                             value="#{label['btn.eliminar']}" 
+                             action="#{beanListaActores.ver()}">
+                <f:param name="actorId" value="#{beanListaActores.actorSeleccionado.actorId}"/>
+            </p:commandButton>
+            <p:commandButton value="#{label['btn.eliminar']}"/>
         </p:panelGrid>
         <p:dataTable id="tabla_actores"
                      value="#{beanListaActores.listaActores}"
@@ -44,16 +35,16 @@
                      selection="#{beanListaActores.actorSeleccionado}"
                      rowKey="#{actor.actorId}">
             <p:ajax event="rowSelect" update=":form:btnVer"/>
-            
-            <p:column headerText="Nombre">
+
+            <p:column headerText="#{label['actor.nombre']}">
                 #{actor.firstName}
             </p:column>
 
-            <p:column headerText="Apellido">
-                    #{actor.lastName}
+            <p:column headerText="#{label['actor.apellido']}">
+                #{actor.lastName}
             </p:column>
 
-            <p:column headerText="Actualizado">
+            <p:column headerText="#{label['actor.actualizado']}">
                 <h:outputLabel value="#{actor.lastUpdate}">
                     <f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
                 </h:outputLabel>

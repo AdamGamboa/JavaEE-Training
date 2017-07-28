@@ -8,43 +8,28 @@
     xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
-        Crear Usuario
+        #{label['actor.crear.titulo']}
     </ui:define>
-    
+
     <ui:define name="content">
-        
-        <h1>Crear Usuario</h1>
-        
-        <p:panelGrid>
-            <p:row>
-                <p:column>
-                    <p:outputLabel value="Nombre: "/>
-                </p:column>
-                <p:column>
-                    <p:inputText value="#{beanCrearActor.nombre}"/>
-                </p:column>
-            </p:row>
+
+        <p:panelGrid columns="2" layout="grid">
+
+            <p:outputLabel value="#{label['actor.nombre']}"/>
+            <p:inputText value="#{beanCrearActor.nombre}"/>
+
+            <p:outputLabel value="#{label['actor.apellido']} "/>
+            <p:inputText value="#{beanCrearActor.apellido}"/>
+
             
-            <p:row>
-                <p:column>
-                    <p:outputLabel value="Apellido "/>
-                </p:column>
-                <p:column>
-                    <p:inputText value="#{beanCrearActor.apellido}"/>
-                </p:column>
-            </p:row>
-            <p:row>
-                <p:column>
-                    <p:commandLink value="Regresar"
-                                   action="/pages/actor/list"
-                                   ajax="false"/>
-                </p:column>
-                <p:column>
-                    <p:commandButton value="Guardar"
-                                     action="#{beanCrearActor.guardar()}"/>
-                </p:column>
-            </p:row>
+            <p:commandLink value="#{label['btn.regresar']}"
+                           action="/pages/actor/list"
+                           ajax="false"/>
+
+            <p:commandButton value="#{label['btn.guardar']}"
+                                 action="#{beanCrearActor.guardar()}"/>
+       
         </p:panelGrid>
     </ui:define>
-    
+
 </ui:composition>
