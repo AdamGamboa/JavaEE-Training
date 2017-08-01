@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+    template="/pages/templates/main-layout.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        #{label['actor.crear.titulo']}
+    </ui:define>
+
+    <ui:define name="content">
+
+        <p:panelGrid columns="2" layout="grid">
+
+            <p:outputLabel value="#{label['actor.nombre']}"/>
+            <p:inputText value="#{beanCrearActor.nombre}"/>
+
+            <p:outputLabel value="#{label['actor.apellido']} "/>
+            <p:inputText value="#{beanCrearActor.apellido}"/>
+
+            
+            <p:commandLink value="#{label['btn.regresar']}"
+                           action="/pages/actor/list"
+                           ajax="false"/>
+
+            <p:commandButton value="#{label['btn.guardar']}"
+                                 action="#{beanCrearActor.guardar()}"/>
+       
+        </p:panelGrid>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:b="http://bootsfaces.net/ui">
+    <b:form>
+        <b:navBar brand="Home" brandHref="#{request.contextPath}/pages/index.xhtml" id="dropMenuExample">
+            <b:navbarLinks>
+                <b:navCommandLink  value="Lenguaje" action="/pages/language/list"></b:navCommandLink >
+                <b:navCommandLink  value="Peliculas" action="/pages/film/list"></b:navCommandLink >
+                <b:navCommandLink  value="Actores" action="/pages/actor/list"></b:navCommandLink >
+                <b:dropMenu value="Ejemplo" contentDisabled="false">
+                    <b:navCommandLink  value="Action" href="#"></b:navCommandLink >
+                    <b:navCommandLink  value="Another action" href="#"></b:navCommandLink >
+                    <b:navLink value="Something else here" href="#"></b:navLink>
+                    <b:navLink></b:navLink>
+                    <b:navLink header="Nav header"></b:navLink>
+                    <b:navLink value="Separated link" href="#"></b:navLink>
+                    <b:navLink value="One more separated link" href="#"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>
+        </b:navBar>
+    </b:form>
+</ui:composition>

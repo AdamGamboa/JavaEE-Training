@@ -1,1 +1,8 @@
+/jaxrs/jaxrs-common/target
+/jaxrs/jaxrs-domain/target
+/jaxrs/jaxrs-model/target
+/jaxrs/jaxrs-services/target
+/jaxrs/jaxrs-restclient/target
+/jaxrs/jaxrs-web/target
+/jaxrs/jaxrs-rest/target
 

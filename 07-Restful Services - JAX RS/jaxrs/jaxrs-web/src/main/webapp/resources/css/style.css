@@ -1,0 +1,22 @@
+
+body{
+    background: #DDD;
+    color:#333;
+}
+
+
+table{
+    color:#555;
+    border: 1px solid #222;
+    background: #FFF;
+}
+
+
+th{
+    background: #444d66;
+    color:#222;
+}
+
+td{
+    border-bottom: 1px solid #333;
+}
