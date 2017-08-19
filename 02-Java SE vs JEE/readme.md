@@ -64,10 +64,10 @@ Mediante Java EE Platform Enterprise Edition (Java EE), puede desarrollar aplica
 - Desplegarse en un Servidor de Aplicaciones Java compatible.
 - El servidor de aplicaciones debe tener los contenedores de las tecnologias utilizadas.
 
-#Iniciando Java EE
+# Iniciando Java EE #
 El primer paso que daremos para desarrollar aplicaciones Java EE es conocimiento las especificaciones/tecnologías Servlets y CDI.
 
-##Servlets
+## Servlets ##
 Los servlets no son más que una clase más dentro del cada vez mayor árbol de paquetes de Java. La clase Servlet fue diseñada para permitir desarrollar de una forma sencilla aplicaciones cliente-servidor.
 
 Los servlets son objetos que corren dentro del contexto de un servidor web (por ejemplo, Apache Tomcat).
@@ -83,7 +83,7 @@ Heredando la clase HttpServlet
 El enfoque mas usado es extendiendo de las clase HttpServlet porque esto provee los metodos de solicitud http tales como: doGet(), doPost(), doHead() etc.
 
 
-## CDI (Context and Dependency Injection) 
+## CDI (Context and Dependency Injection)
 CDI o Context Dependency Injection define el mecanismo para resolver dependencias entre servicios dentro del estándar JEE, a partir de la versión 6. CDI te da posibilidad de inyectar componentes en una aplicación de modo typesafe, incluyendo la posibilidad de seleccionar en tiempo de despliegue que implementación en particular a usar.
 
 Similar a los conceptos de Dependency Injection proporcionados por: Spring o Google Guice.
@@ -113,7 +113,7 @@ Ahora:
 		}
 	} 
 
-###Inject 
+### Inject ###
 Es la manera por la cual es obtiene la instancia de un objeto. Pueden ser instancias de clases creadas por nosotros, o de instancias administradas por un contenedor, EJBs, Recursos, DataSources, etc.
 
 - Se busca si existe una instancia disponible
@@ -122,7 +122,7 @@ Es la manera por la cual es obtiene la instancia de un objeto. Pueden ser instan
 
 La anotación `@Inject` se puede aplicar a variables y a métodos. El uso más común es a variables.
 
-###Managed Bean
+### Managed Bean ###
 Una Managed Bean es una clase cuyas instancias son administradas por el contenedor de Managed Beans. 
 
 Para ello tiene que seguir las siguientes condiciones: 
@@ -132,7 +132,7 @@ Para ello tiene que seguir las siguientes condiciones:
 - Tiene un constructor apropiado. Constructor sin parámetros o el constructor esta anotado con @Inject
 
 
-###Scopes
+### Scopes ###
 Un scope define el ciclo de vida de una instancia de un bean administrado. 
 
 - Request `@RequestScoped`
@@ -141,7 +141,7 @@ Un scope define el ciclo de vida de una instancia de un bean administrado.
 - Dependent `@DependentScoped`
 - Conversation `@ConversationScoped`
 
-###Qualifiers
+### Qualifiers ###
 Cuando tenemos una hacemos una injección a una clase que tiene varias implementaciones, debemos indicar un calificador para conocer la implementación especifica a la cual se desea crear la instancia.
 
     public class Moneda{}
@@ -173,10 +173,10 @@ Un Qualifier es una anotación creada, que luego se agrega a la clase a injectar
 		private Moneda moneda;
 	}
 
-###Named
+### Named ###
 Con la anotación @Named es un qualifier que le permite al bean ser accedido por un nombre. Este es muy importante cuando queremos accederlo atravez de EL (Expression Language), disponible en JSP y JSF. 
 
-###PostConstruct 
+### PostConstruct ###
 Todos serán inyectados luego del constructor, por lo cual si se accede a dicha variable dentro del constructor su valor será `null`.  
 
 Para ello se utiliza la anotación @PostConstruct a un método, este método será llamado uno vez se haya ejecutado el constructor de la clase, y en este punto si tenemos las variables inyectadas con sus valores correspondientes.
